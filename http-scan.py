@@ -68,7 +68,7 @@ def parse_targets(target):
     return targets
 
 def main():
-    parser = argparse.ArgumentParser(description="HTTP Scanner - by Kuldeep (2025)")
+    parser = argparse.ArgumentParser(description="HTTP Vulnerability Scanner - by kuldeep (latest version)")
     parser.add_argument("-t", "--target", help="Target IP or CIDR (e.g., 192.168.1.1 or 192.168.1.0/24)")
     parser.add_argument("-d", "--domain", help="Target domain name (e.g., example.com)")
     parser.add_argument("-p", "--ports", nargs="+", type=int, default=[80, 443], help="Ports to scan (default: 80 443)")
