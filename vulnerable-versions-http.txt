@@ -1,0 +1,32 @@
+# === Apache HTTP Server ===
+Apache/2.2.3        # CVE-2011-3192 - Range DoS
+Apache/2.0.64       # CVE-2009-3555 - TLS renegotiation
+
+# === Nginx ===
+nginx/1.4.0         # CVE-2013-2028 - Integer overflow in chunked transfer
+nginx/1.0.15        # CVE-2012-1180 - Memory disclosure via empty headers
+
+# === Microsoft IIS ===
+Microsoft-IIS/6.0   # CVE-2017-7269 - WebDAV buffer overflow (RCE)
+Microsoft-IIS/7.0   # CVE-2010-2730 - Remote code execution via ISAPI
+
+# === Lighttpd ===
+lighttpd/1.4.28     # CVE-2012-5533 - Memory corruption & crash
+
+# === OpenResty ===
+OpenResty/1.11.2.1  # CVE-2018-1000168 - OpenSSL vulnerability (via bundled version)
+
+# === Jetty ===
+Jetty(6.1.26)       # CVE-2011-4461 - Denial of Service via incomplete requests
+
+# === Apache Tomcat ===
+Tomcat/7.0.27       # CVE-2012-5568 - Bypass of security constraints
+
+# === Tornado ===
+TornadoServer/4.2.1 # CVE-2017-1000042 - Open redirect vulnerability
+
+# === Gunicorn ===
+Gunicorn/19.4.5     # CVE-2015-1000314 - Incorrect header parsing (header injection)
+
+# === Werkzeug (Flask default server) ===
+Werkzeug/0.11.15    # CVE-2016-10516 - Debug console RCE vulnerability
