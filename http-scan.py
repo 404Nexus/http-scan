@@ -5,8 +5,25 @@ from datetime import datetime
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+VULN_LIST_HTTP = "vulnerable_versions_http.txt"
 COMMON_PATHS = ["/", "/admin", "/login", "/robots.txt"]
-VULN_SIGNATURES = ["Apache/2.2.3", "PHP/5.2", "nginx/1.4", "IIS/6.0"]
+
+def is_vulnerable(banner):
+    try:
+        with open(VULN_LIST_HTTP, "r") as f:
+            for line in f:
+                if line.strip() in banner:
+                    return True
+    except FileNotFoundError:
+        print("[-] vulnerable_versions_http.txt not found.")
+    return False
+
+def extract_title(html):
+    start = html.find("<title>")
+    end = html.find("</title>")
+    if start != -1 and end != -1:
+        return html[start+7:end].strip()
+    return "No Title"
 
 def scan_http(host, ports, verbose=False, save_file=None):
     for port in ports:
@@ -22,7 +39,7 @@ def scan_http(host, ports, verbose=False, save_file=None):
             else:
                 print(f"[+] {url} - OPEN")
 
-            if any(sig in banner for sig in VULN_SIGNATURES):
+            if is_vulnerable(banner):
                 print(f"[!] {url} - Vulnerable HTTP Server Detected: {banner}")
 
             for path in COMMON_PATHS:
@@ -38,13 +55,6 @@ def scan_http(host, ports, verbose=False, save_file=None):
             if verbose:
                 print(f"[-] {url} - Unreachable or Error")
 
-def extract_title(html):
-    start = html.find("<title>")
-    end = html.find("</title>")
-    if start != -1 and end != -1:
-        return html[start+7:end].strip()
-    return "No Title"
-
 def parse_targets(target):
     targets = []
     try:
@@ -58,7 +68,7 @@ def parse_targets(target):
     return targets
 
 def main():
-    parser = argparse.ArgumentParser(description="HTTP VAPT Scanner - by Kuldeep (2025)")
+    parser = argparse.ArgumentParser(description="HTTP Scanner - by Kuldeep (2025)")
     parser.add_argument("-t", "--target", help="Target IP or CIDR (e.g., 192.168.1.1 or 192.168.1.0/24)")
     parser.add_argument("-d", "--domain", help="Target domain name (e.g., example.com)")
     parser.add_argument("-p", "--ports", nargs="+", type=int, default=[80, 443], help="Ports to scan (default: 80 443)")
@@ -77,7 +87,6 @@ def main():
     for host in targets:
         thread = threading.Thread(target=scan_http, args=(host, args.ports, args.verbose, args.output))
         thread.start()
-
 
 if __name__ == "__main__":
     main()
