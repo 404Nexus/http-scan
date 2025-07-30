@@ -1,0 +1,48 @@
+# === Python Bytecode & Cache ===
+__pycache__/
+*.py[cod]
+*$py.class
+
+# === Virtual Environments ===
+venv/
+.venv/
+ENV/
+env/
+
+# === Logs, Output & Temp Files ===
+*.log
+*.tmp
+*.bak
+*.out
+*.pid
+*.swp
+
+# === Scanner Results / Outputs ===
+output/
+results/
+*.txt
+*.csv
+*.json
+*.xml
+*.scan
+*.nmap
+
+# === Secrets, Keys, Config Files ===
+.env
+*.key
+*.pem
+*.crt
+*.db
+config.*
+secrets.*
+
+# === IDE/Editor Folders ===
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# === System Files ===
+.DS_Store
+Thumbs.db
+desktop.ini
