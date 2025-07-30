@@ -41,7 +41,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # 4. Run the scanner
-python3 http_scanner.py -h
+python3 http-scan.py -h
 ```
 ### Usage:
 ```bash
